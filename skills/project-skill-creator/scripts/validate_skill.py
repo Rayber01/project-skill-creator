@@ -146,8 +146,7 @@ def scan_secrets(skill_dir: Path, errors: List[str]) -> None:
             for lineno, line in enumerate(data.decode("utf-8", errors="ignore").splitlines(), 1):
                 for label, pattern in SECRET_PATTERNS:
                     if pattern.search(line):
-                        rel = path.relative_to(skill_dir)
-                        errors.append(f"possible secret ({label}) in {rel}:{lineno}")
+                        errors.append("possible secret detected (details redacted)")
 
 
 def validate_skill(skill_dir: Path) -> Tuple[List[str], List[str], Optional[str]]:
