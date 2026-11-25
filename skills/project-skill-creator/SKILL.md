@@ -4,7 +4,7 @@ description: Creates, audits and improves Agent Skills (SKILL.md) tailored to th
 license: MIT
 compatibility: Works with any Agent Skills-compatible agent. Optional helper scripts need Python 3.9+; without a shell use references/no-shell-mode.md.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 # Project Skill Creator
