@@ -146,8 +146,7 @@ def scan_secrets(skill_dir: Path, errors: List[str]) -> None:
             for lineno, line in enumerate(data.decode("utf-8", errors="ignore").splitlines(), 1):
                 for label, pattern in SECRET_PATTERNS:
                     if pattern.search(line):
-                        rel = path.relative_to(skill_dir)
-                        errors.append(f"possible secret ({label}) in {rel}:{lineno}")
+                        errors.append("possible secret detected (details redacted)")
 
 
 def validate_skill(skill_dir: Path) -> Tuple[List[str], List[str], Optional[str]]:
@@ -272,12 +271,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         ok = not errors and not (args.strict and warnings)
         print(f"{'OK   ' if ok else 'FAIL '} {label}  ({skill_dir})")
         for message in errors:
-            safe_message = (
-                "possible secret detected (details redacted)"
-                if message.startswith("possible secret (")
-                else message
-            )
-            print(f"  ERROR {safe_message}")
+            print(f"  ERROR {message}")
         for message in warnings:
             print(f"  WARN  {message}")
         if not ok:
