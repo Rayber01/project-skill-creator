@@ -272,7 +272,12 @@ def main(argv: Optional[List[str]] = None) -> int:
         ok = not errors and not (args.strict and warnings)
         print(f"{'OK   ' if ok else 'FAIL '} {label}  ({skill_dir})")
         for message in errors:
-            print(f"  ERROR {message}")
+            safe_message = (
+                "possible secret detected (details redacted)"
+                if message.startswith("possible secret (")
+                else message
+            )
+            print(f"  ERROR {safe_message}")
         for message in warnings:
             print(f"  WARN  {message}")
         if not ok:
